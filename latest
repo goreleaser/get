@@ -21,10 +21,6 @@ download() {
     "$DOWNLOAD_URL/$version/release_$(uname -s)_$(uname -m).tar.gz"
 }
 
-extract() {
-  tar -xf "$TAR_FILE" -C "$TMPDIR"
-}
-
 download
-extract || true
-echo "$TMPDIR"/release
+tar -xf "$TAR_FILE" -C "$TMPDIR"
+"${TMPDIR}release"
