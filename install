@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+TAR_FILE="/tmp/release.tar.gz"
+DOWNLOAD_URL="https://github.com/goreleaser/homebrew-formulae/releases/download"
+test -z "$TMPDIR" && TMPDIR="$(mktemp -d)"
+
+last_version() {
+  curl -s https://raw.githubusercontent.com/goreleaser/homebrew-formulae/master/release.rb |
+    grep url |
+    cut -f8 -d'/'
+}
+
+download() {
+  version="$(last_version)" || true
+  test -z "$version" && {
+    echo "Unable to get goreleaser version."
+    exit 1
+  }
+  echo "Downloading goreleaser $version for $(uname -s)_$(uname -m)..."
+  rm -f /tmp/antibody.tar.gz
+  curl -s -L -o "$TAR_FILE" \
+    "$DOWNLOAD_URL/v$version/release_$(uname -s)_$(uname -m).tar.gz"
+}
+
+extract() {
+  tar -xf "$TAR_FILE" -C "$TMPDIR"
+}
+
+download
+extract || true
+echo "$TMPDIR"/release
