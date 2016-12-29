@@ -23,4 +23,4 @@ download() {
 
 download
 tar -xf "$TAR_FILE" -C "$TMPDIR"
-"${TMPDIR}release"
+"${TMPDIR}/release"
