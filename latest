@@ -11,15 +11,14 @@ last_version() {
 }
 
 download() {
-  version="$(last_version)" || true
+  version="$(last_version)"
   test -z "$version" && {
-    echo "Unable to get goreleaser version."
+    echo "Unable to get goreleaser version." >&2
     exit 1
   }
-  echo "Downloading goreleaser $version for $(uname -s)_$(uname -m)..."
-  rm -f /tmp/antibody.tar.gz
+  rm -f "$TAR_FILE"
   curl -s -L -o "$TAR_FILE" \
-    "$DOWNLOAD_URL/v$version/release_$(uname -s)_$(uname -m).tar.gz"
+    "$DOWNLOAD_URL/$version/release_$(uname -s)_$(uname -m).tar.gz"
 }
 
 extract() {
