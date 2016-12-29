@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 TAR_FILE="/tmp/release.tar.gz"
-DOWNLOAD_URL="https://github.com/goreleaser/homebrew-formulae/releases/download"
+DOWNLOAD_URL="https://github.com/goreleaser/releaser/releases/download"
 test -z "$TMPDIR" && TMPDIR="$(mktemp -d)"
 
 last_version() {
