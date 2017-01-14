@@ -18,9 +18,9 @@ download() {
   }
   rm -f "$TAR_FILE"
   curl -s -L -o "$TAR_FILE" \
-    "$DOWNLOAD_URL/$version/release_$(uname -s)_$(uname -m).tar.gz"
+    "$DOWNLOAD_URL/$version/goreleaser_$(uname -s)_$(uname -m).tar.gz"
 }
 
 download
 tar -xf "$TAR_FILE" -C "$TMPDIR"
-"${TMPDIR}/release"
+"${TMPDIR}/goreleaser"
