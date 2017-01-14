@@ -5,7 +5,7 @@ DOWNLOAD_URL="https://github.com/goreleaser/releaser/releases/download"
 test -z "$TMPDIR" && TMPDIR="$(mktemp -d)"
 
 last_version() {
-  curl -s https://raw.githubusercontent.com/goreleaser/homebrew-tap/master/release.rb |
+  curl -s https://raw.githubusercontent.com/goreleaser/homebrew-tap/master/Formula/goreleaser.rb |
     grep url |
     cut -f8 -d'/'
 }
