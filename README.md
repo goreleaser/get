@@ -2,5 +2,11 @@
 Get the latest goreleaser binary
 
 ```sh
-curl -s https://raw.githubusercontent.com/goreleaser/get/master/latest | bash
+curl -s https://git.io/goreleaser | bash
+```
+
+Or, if you want to lock an specific version:
+
+```sh
+curl -s https://git.io/goreleaser | VERSION=v0.7.0 bash
 ```
