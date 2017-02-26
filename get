@@ -1,0 +1,27 @@
+#!/bin/sh
+set -e
+
+TAR_FILE="/tmp/goreleaser.tar.gz"
+DOWNLOAD_URL="https://github.com/goreleaser/goreleaser/releases/download"
+test -z "$TMPDIR" && TMPDIR="$(mktemp -d)"
+
+last_version() {
+  curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/goreleaser/goreleaser/releases/latest |
+    grep tag_name |
+    cut -f4 -d'"'
+}
+
+download() {
+  test -z "$VERSION" && VERSION="$(last_version)"
+  test -z "$VERSION" && {
+    echo "Unable to get goreleaser version." >&2
+    exit 1
+  }
+  rm -f "$TAR_FILE"
+  curl -s -L -o "$TAR_FILE" \
+    "$DOWNLOAD_URL/$VERSION/goreleaser_$(uname -s)_$(uname -m).tar.gz"
+}
+
+download
+tar -xf "$TAR_FILE" -C "$TMPDIR"
+"${TMPDIR}/goreleaser"
