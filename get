@@ -6,7 +6,9 @@ DOWNLOAD_URL="https://github.com/goreleaser/goreleaser/releases/download"
 test -z "$TMPDIR" && TMPDIR="$(mktemp -d)"
 
 last_version() {
-  curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/goreleaser/goreleaser/releases/latest |
+  local header
+  test -z "$GITHUB_TOKEN" || header="-H \"Authorization: token $GITHUB_TOKEN\""
+  curl -s $header https://api.github.com/repos/goreleaser/goreleaser/releases/latest |
     grep tag_name |
     cut -f4 -d'"'
 }
