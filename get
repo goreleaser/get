@@ -2,7 +2,7 @@
 set -e
 
 TAR_FILE="/tmp/goreleaser.tar.gz"
-RELEASES_URL="https://github.com/goreleaser/goreleaser/releases""
+RELEASES_URL="https://github.com/goreleaser/goreleaser/releases"
 test -z "$TMPDIR" && TMPDIR="$(mktemp -d)"
 
 last_version() {
