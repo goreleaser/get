@@ -1,3 +1,7 @@
+# Deprecated
+
+Use https://goreleaser.com/install/#bash-script instead.
+
 # get
 Get the latest goreleaser binary
 
